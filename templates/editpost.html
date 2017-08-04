@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="full-width-bar">
+    <h1>Edit post</h1>
+</div>
+<form method="POST">
+    <label>
+        Subject<br>
+        <input class="form-control" style="width:800px;" type="text" name="subject" value="{{post.subject}}">
+    </label>
+    <br><br>
+    <label>
+        Blog<br>
+        <textarea class="form-control" name="content" style="width:800px;height:200px;">{{post.content}}</textarea>
+    </label>
+    <br>
+    <label class="alert-danger">{{post_error}}</label>
+    <input type="submit" class="btn info" name="update" value="UPDATE">
+    <input type="submit" class="btn default" name="cancel" value="CANCEL">
+</form>
+{% endblock %}

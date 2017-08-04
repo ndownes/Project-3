@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="full-width-bar">
+    <h1>New post</h1>
+</div>
+<br>
+<form method="POST" form class="form-inline" role="form">
+    <div class="form-group">
+    <label>
+        Subject<br>
+        <input class="form-control" style="width:800px;" type="text" name="subject" value="{{subject}}">
+    </label>
+    <br><br>
+    <label>
+        Post<br>
+        <textarea class="form-control" name="content" style="width:800px;height:200px;">{{content}}</textarea>
+    </label>
+    <br>
+    <div class="alert-danger">{{post_error}}</div>
+    <input type="submit" class="btn info" value="SUBMIT">
+    <br>
+</form>
+{% endblock %}

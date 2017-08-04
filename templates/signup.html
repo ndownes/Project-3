@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="full-width-bar">
+    <h1>Signup</h1>
+</div>
+<br>
+<form method="POST" form class="form-horizontal span8">
+    <div class="control-group">
+        <label class="control-label" label for="username">Username</label>
+        <div class="controls">
+            <input type="text" name="username" class="span8" value="{{username}}" required>
+        </div>
+    </div>
+    {{error_username}}
+    <div class="control-group">
+        <label class="control-label" label for="password">Password</label>
+        <div class="controls">
+            <input type="password" name="password" class="span3" value="" required>
+        </div>
+    </div>
+    {{error_password}}
+    <div class="control-group">
+        <label class="control-label" label for="verify">Confirm Password</label>
+        <div class="controls">
+            <input type="password" name="verify" class="span3" value="" required>
+        </div>
+    </div>
+    {{error_verify}}
+    <div class="control-group">
+        <label class="control-label" label for="email">Email (Optional)</label>
+        <div class="controls">
+            <input type="text" name="email" id="email" class="span3" value="">
+        </div>
+    </div>
+    <br>
+    <input type="submit" class="btn default" value="SIGNUP">
+    <br>
+</form>
+<br>
+Already registered?<br><br>
+<button class="btn info" href="/login">LOGIN</a>
+{% endblock %}

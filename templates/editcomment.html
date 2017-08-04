@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="full-width-bar">
+    <h1>Edit Comment</h1>
+</div>
+<form method="POST">
+    <textarea class="form-control" name="comment_text" style="width:800px;height:100px;">{{comment_text}}</textarea>
+    <br>
+    <div class="alert-danger">{{edit_error}}</div>
+    <input type="submit" class="btn info" name="update_comment" value="UPDATE">
+    <input type="submit" class="btn default" name="cancel" value="CANCEL">
+</form>
+{% endblock %}

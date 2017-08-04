@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="full-width-bar">
+    <h1>Login</h1>
+</div>
+    <br>
+<form method="POST" form class="form-horizontal span8">
+    <div class="control-group">
+        <label class="control-label" label for="username">Username</label>
+        <div class="controls">
+            <input type="text" name="username" class="span8" value="{{username}}" required>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" label for="password">Password</label>
+        <div class="controls">
+            <input type="password" name="password" class="span3" value="" required>
+        </div>
+    </div>
+    <br>
+    <div class="alert-danger">{{error}}</div>
+    <input type="submit" class="btn info" value="LOGIN">
+    <br>
+</form>
+<br><b>
+Not registered yet?</b><br><br>
+<button class="btn default" href="/signup">SIGNUP</a>
+{% endblock %}
