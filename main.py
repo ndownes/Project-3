@@ -296,7 +296,8 @@ class PostPage(Handler):
 
         if self.user:
             if self.request.get("like"):
-                if post.user.key().id() != User.by_name(self.user.name).key().id():
+                if post.user.key().id() !=
+                User.by_name(self.user.name).key().id():
                     if previously_liked == 0:
                         l = Like(
                             post=post, user=User.by_name(
@@ -325,7 +326,8 @@ class PostPage(Handler):
                         comments_count=comments_count,
                         post_comments=post_comments)
             if self.request.get("unlike"):
-                if post.user.key().id() != User.by_name(self.user.name).key().id():
+                if post.user.key().id() !=
+                User.by_name(self.user.name).key().id():
                     if previously_unliked == 0:
                         ul = Unlike(
                             post=post, user=User.by_name(
@@ -363,7 +365,8 @@ class PostPage(Handler):
                     time.sleep(0.1)
                     self.redirect('/post/%s' % str(post.key().id()))
                 else:
-                    comment_error = "Please enter a comment in the text area to post"
+                    comment_error = "Please enter a comment in the,"/
+                    " text area to post"
                     self.render(
                         "post.html",
                         post=post,
@@ -373,7 +376,8 @@ class PostPage(Handler):
                         post_comments=post_comments,
                         comment_error=comment_error)
             if self.request.get("edit"):
-                if post.user.key().id() == User.by_name(self.user.name).key().id():
+                if post.user.key().id() ==
+                User.by_name(self.user.name).key().id():
                     self.redirect('/edit/%s' % str(post.key().id()))
                 else:
                     error = "You cannot edit other user's posts"
@@ -386,7 +390,8 @@ class PostPage(Handler):
                         post_comments=post_comments,
                         error=error)
             if self.request.get("delete"):
-                if post.user.key().id() == User.by_name(self.user.name).key().id():
+                if post.user.key().id() ==
+                User.by_name(self.user.name).key().id():
                     db.delete(key)
                     time.sleep(0.1)
                     self.redirect('/')
@@ -605,7 +610,8 @@ class Logout(Handler):
             self.logout()
             self.redirect("/signup")
         else:
-            error = 'You need to be logged in to be able to log out. Please log in.'
+            error = 'You need to be logged in to be able to,'/
+            ' log out. Please log in.'
             self.render('login.html', error=error)
 
 # WSGI
