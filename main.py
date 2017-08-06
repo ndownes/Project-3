@@ -405,8 +405,8 @@ class PostPage(Handler):
                             comments_count=comments_count,
                             post_comments=post_comments,
                             error=error)
-            else:
-                self.redirect("/login")
+        else:
+            self.redirect("/login")
 
 # Delete comment handler
 
