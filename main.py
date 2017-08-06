@@ -296,8 +296,8 @@ class PostPage(Handler):
 
         if self.user:
             if self.request.get("like"):
-                if post.user.key().id() != User.by_name(
-                                        self.user.name).key().id():
+                if post.user.key().id() !=User.by_name(
+                    self.user.name).key().id():
                     if previously_liked == 0:
                         l = Like(
                             post=post, user=User.by_name(
@@ -326,8 +326,8 @@ class PostPage(Handler):
                         comments_count=comments_count,
                         post_comments=post_comments)
             if self.request.get("unlike"):
-                if post.user.key().id() != User.by_name(
-                                        self.user.name).key().id():
+                if post.user.key().id() !=User.by_name(
+                    self.user.name).key().id():
                     if previously_unliked == 0:
                         ul = Unlike(
                             post=post, user=User.by_name(
