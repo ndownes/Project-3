@@ -285,7 +285,7 @@ class PostPage(Handler):
     def post(self, blog_id):
         key = db.Key.from_path("Blog", int(blog_id), parent=blog_key())
         post = db.get(key)
-            if post is not None:
+        if post is not None:
             user_id = User.by_name(self.user.name)
             comments_count = Comment.count_by_blog_id(post)
             post_comments = Comment.all_by_blog_id(post)
