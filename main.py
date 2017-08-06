@@ -285,7 +285,7 @@ class PostPage(Handler):
     def post(self, blog_id):
         key = db.Key.from_path("Blog", int(blog_id), parent=blog_key())
         post = db.get(key)
-        if post is not None:
+            if post is not None:
             user_id = User.by_name(self.user.name)
             comments_count = Comment.count_by_blog_id(post)
             post_comments = Comment.all_by_blog_id(post)
@@ -294,117 +294,117 @@ class PostPage(Handler):
             previously_liked = Like.check_like(post, user_id)
             previously_unliked = Unlike.check_unlike(post, user_id)
 
-            if self.user:
-                if self.request.get("like"):
-                    if post.user.key().id() !=
-                    User.by_name(self.user.name).key().id():
-                        if previously_liked == 0:
-                            l = Like(
-                                post=post, user=User.by_name(
-                                    self.user.name))
-                            l.put()
-                            time.sleep(0.1)
-                            self.redirect('/post/%s' % str(post.key().id()))
-                        else:
-                            error = "You have already liked this post"
-                            self.render(
-                                "post.html",
-                                post=post,
-                                likes=likes,
-                                unlikes=unlikes,
-                                error=error,
-                                comments_count=comments_count,
-                                post_comments=post_comments)
-                    else:
-                        error = "You cannot like your own posts"
-                        self.render(
-                            "post.html",
-                            post=post,
-                            likes=likes,
-                            unlikes=unlikes,
-                            error=error,
-                            comments_count=comments_count,
-                            post_comments=post_comments)
-                if self.request.get("unlike"):
-                    if post.user.key().id() !=
-                    User.by_name(self.user.name).key().id():
-                        if previously_unliked == 0:
-                            ul = Unlike(
-                                post=post, user=User.by_name(
-                                    self.user.name))
-                            ul.put()
-                            time.sleep(0.1)
-                            self.redirect('/post/%s' % str(post.key().id()))
-                        else:
-                            error = "You have already unliked this post"
-                            self.render(
-                                "post.html",
-                                post=post,
-                                likes=likes,
-                                unlikes=unlikes,
-                                error=error,
-                                comments_count=comments_count,
-                                post_comments=post_comments)
-                    else:
-                        error = "You cannot unlike your own posts"
-                        self.render(
-                            "post.html",
-                            post=post,
-                            likes=likes,
-                            unlikes=unlikes,
-                            error=error,
-                            comments_count=comments_count,
-                            post_comments=post_comments)
-                if self.request.get("add_comment"):
-                    comment_text = self.request.get("comment_text")
-                    if comment_text:
-                        c = Comment(
+        if self.user:
+            if self.request.get("like"):
+                if post.user.key().id() !=
+                User.by_name(self.user.name).key().id():
+                    if previously_liked == 0:
+                        l = Like(
                             post=post, user=User.by_name(
-                                self.user.name), text=comment_text)
-                        c.put()
+                                self.user.name))
+                        l.put()
                         time.sleep(0.1)
                         self.redirect('/post/%s' % str(post.key().id()))
                     else:
-                        comment_error = "Please enter a comment in the,"/
-                        " text area to post"
+                        error = "You have already liked this post"
                         self.render(
                             "post.html",
                             post=post,
                             likes=likes,
                             unlikes=unlikes,
+                            error=error,
                             comments_count=comments_count,
-                            post_comments=post_comments,
-                            comment_error=comment_error)
-                if self.request.get("edit"):
-                    if post.user.key().id() ==
-                    User.by_name(self.user.name).key().id():
-                        self.redirect('/edit/%s' % str(post.key().id()))
-                    else:
-                        error = "You cannot edit other user's posts"
-                        self.render(
-                            "post.html",
-                            post=post,
-                            likes=likes,
-                            unlikes=unlikes,
-                            comments_count=comments_count,
-                            post_comments=post_comments,
-                            error=error)
-                if self.request.get("delete"):
-                    if post.user.key().id() ==
-                    User.by_name(self.user.name).key().id():
-                        db.delete(key)
+                            post_comments=post_comments)
+                else:
+                    error = "You cannot like your own posts"
+                    self.render(
+                        "post.html",
+                        post=post,
+                        likes=likes,
+                        unlikes=unlikes,
+                        error=error,
+                        comments_count=comments_count,
+                        post_comments=post_comments)
+            if self.request.get("unlike"):
+                if post.user.key().id() !=
+                User.by_name(self.user.name).key().id():
+                    if previously_unliked == 0:
+                        ul = Unlike(
+                            post=post, user=User.by_name(
+                                self.user.name))
+                        ul.put()
                         time.sleep(0.1)
-                        self.redirect('/')
+                        self.redirect('/post/%s' % str(post.key().id()))
                     else:
-                        error = "You cannot delete other user's posts"
+                        error = "You have already unliked this post"
                         self.render(
                             "post.html",
                             post=post,
                             likes=likes,
                             unlikes=unlikes,
+                            error=error,
                             comments_count=comments_count,
-                            post_comments=post_comments,
-                            error=error)
+                            post_comments=post_comments)
+                else:
+                    error = "You cannot unlike your own posts"
+                    self.render(
+                        "post.html",
+                        post=post,
+                        likes=likes,
+                        unlikes=unlikes,
+                        error=error,
+                        comments_count=comments_count,
+                        post_comments=post_comments)
+            if self.request.get("add_comment"):
+                comment_text = self.request.get("comment_text")
+                if comment_text:
+                    c = Comment(
+                        post=post, user=User.by_name(
+                            self.user.name), text=comment_text)
+                    c.put()
+                    time.sleep(0.1)
+                    self.redirect('/post/%s' % str(post.key().id()))
+                else:
+                    comment_error = "Please enter a comment in the,"/
+                    " text area to post"
+                    self.render(
+                        "post.html",
+                        post=post,
+                        likes=likes,
+                        unlikes=unlikes,
+                        comments_count=comments_count,
+                        post_comments=post_comments,
+                        comment_error=comment_error)
+            if self.request.get("edit"):
+                if post.user.key().id() ==
+                User.by_name(self.user.name).key().id():
+                    self.redirect('/edit/%s' % str(post.key().id()))
+                else:
+                    error = "You cannot edit other user's posts"
+                    self.render(
+                        "post.html",
+                        post=post,
+                        likes=likes,
+                        unlikes=unlikes,
+                        comments_count=comments_count,
+                        post_comments=post_comments,
+                        error=error)
+            if self.request.get("delete"):
+                if post.user.key().id() ==
+                User.by_name(self.user.name).key().id():
+                    db.delete(key)
+                    time.sleep(0.1)
+                    self.redirect('/')
+                else:
+                    error = "You cannot delete other user's posts"
+                    self.render(
+                        "post.html",
+                        post=post,
+                        likes=likes,
+                        unlikes=unlikes,
+                        comments_count=comments_count,
+                        post_comments=post_comments,
+                        error=error)
         else:
             self.redirect("/login")
 
